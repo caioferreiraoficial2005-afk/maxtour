@@ -6,7 +6,7 @@
   2. logo.png (clara, vai sobre a capa) e logo-escura.png (menu branco), PNG sem fundo
   3. --laranja / --brasa / --azul / --tinta no :root pelas cores da logo
   4. WhatsApp: 5582987573577 (const WA, botão flutuante e rodapé) e o e-mail
-  5. Fotos do cliente: quem somos (transfer-van.jpg), serviços (chegada-familia.jpg e aeroporto.jpg)
+  5. Fotos do cliente: quem somos (transfer-van.webp), serviços (chegada-familia.webp e aeroporto.webp)
   6. Números do "Quem somos" (nota no Google, anos, 24h) e o endereço/base no rodapé
   7. og.jpg: print do topo do site em 1200x630 (capa do link no WhatsApp)
   Ao mandar o link no WhatsApp, usar /?site no final pra capa aparecer.
@@ -31,7 +31,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://maxtour.vercel.app/og.jpg">
 <link rel="icon" href="favicon.png">
-<link rel="preload" href="capa.jpg" as="image" media="(min-width:0px)">
+<link rel="preload" href="capa-v2.webp" as="image" media="(min-width:901px)" fetchpriority="high">
+<link rel="preload" href="capa-v2-m.webp" as="image" media="(max-width:900px)" fetchpriority="high">
+<link rel="preconnect" href="https://maps.google.com">
+<link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://maps.googleapis.com">
 <link rel="preload" href="barlowc-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="barlow-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -97,7 +101,7 @@ h1,h2,h3{font-family:"BC",sans-serif;font-weight:800;text-transform:uppercase;li
 .est i{font-style:normal;display:inline-block;text-shadow:0 0 0 rgba(255,194,26,0)}
 
 /* NETO */
-.quem{position:relative;z-index:5;will-change:clip-path;background:var(--papel);padding:clamp(110px,12vw,180px) 0}
+.quem{position:relative;z-index:5;background:var(--papel);padding:clamp(110px,12vw,180px) 0}
 .quem .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,100px);align-items:center}
 .sol{position:relative;aspect-ratio:1/1.1;max-width:540px;width:100%;justify-self:center}
 .sol .disco{position:absolute;left:-4%;top:8%;width:82%;aspect-ratio:1;border-radius:50%;background:var(--laranja)}
@@ -123,7 +127,7 @@ h1,h2,h3{font-family:"BC",sans-serif;font-weight:800;text-transform:uppercase;li
 .dest{position:relative;z-index:6;background:#fff}
 .dest-t{padding:clamp(110px,11vw,170px) 0 clamp(56px,6vw,90px)}
 .palco{position:relative;height:100vh;height:100svh;min-height:540px;overflow:hidden;background:var(--noite);color:#fff}
-.camada{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-end;will-change:clip-path}
+.camada{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-end;overflow:hidden}
 .camada picture,.camada img{position:absolute;inset:0;width:100%;height:100%}
 .camada img{object-fit:cover}
 .camada::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,12,16,.72) 0%,rgba(10,12,16,.2) 45%,rgba(10,12,16,0) 100%)}
@@ -372,7 +376,70 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
   footer .base{flex-direction:column;align-items:center;gap:6px;text-align:center}
 }
 @media(min-width:901px) and (max-width:1150px){.mural{columns:2}}
-</style>
+
+/* v2: desempenho */
+.camada{will-change:transform}
+.quem{will-change:transform}
+.camada picture{will-change:transform}
+/* v2: confiança */
+.conf{position:relative;z-index:6;background:var(--noite);color:#fff;padding:clamp(90px,10vw,150px) 0;overflow:hidden}
+.conf .bgc{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32}
+.conf::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,12,16,.55),rgba(10,12,16,.9))}
+.conf .wrap{position:relative;z-index:2}
+.conf .k{color:#ffc477}
+.conf h2{font-size:clamp(48px,6vw,100px);max-width:13ch;margin:14px 0 18px}
+.conf h2 em{font-style:normal;color:var(--laranja)}
+.conf .sub{font-size:clamp(18px,1.6vw,22px);max-width:44ch;opacity:.9}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:clamp(44px,5vw,70px)}
+.ci{border-top:2px solid var(--laranja);padding:22px 4px 0}
+.ci svg{width:34px;height:34px;color:var(--laranja);margin-bottom:14px}
+.ci b{display:block;font-family:"BC";font-weight:800;text-transform:uppercase;font-size:clamp(24px,2vw,30px);line-height:1}
+.ci span{display:block;font-size:15.5px;opacity:.82;margin-top:8px;line-height:1.45}
+/* v2: fita de fotos do Instagram */
+.fita{position:relative;z-index:6;background:var(--papel);padding:clamp(80px,8vw,120px) 0;overflow:hidden}
+.fita .tit{margin-bottom:clamp(34px,4vw,54px)}
+.fita .tit a{color:var(--laranja);font-weight:700}
+.trilha{display:flex;gap:14px;width:max-content;animation:fita 60s linear infinite}
+.fita:hover .trilha{animation-play-state:paused}
+.trilha img{height:clamp(240px,24vw,360px);width:auto;aspect-ratio:4/5;object-fit:cover;flex:none}
+@keyframes fita{to{transform:translate3d(-50%,0,0)}}
+@media(prefers-reduced-motion:reduce){.trilha{animation:none}}
+/* v2: palco em trilho (horizontal) */
+.palco.trilho .trk{position:absolute;inset:0;display:flex;will-change:transform}
+.palco.trilho .camada{position:relative;inset:auto;flex:0 0 100vw;width:100vw;height:100%;clip-path:none!important}
+/* v2: palco em pilha (cartões que empilham) */
+.palco.pilha{height:auto;min-height:0;overflow:visible;background:transparent;padding:10px 0 40px}
+.palco.pilha .camada{position:sticky;inset:auto;top:11vh;height:78vh;width:min(1240px,92vw);margin:0 auto 6vh;border-radius:26px;overflow:hidden;clip-path:none!important;transform-origin:50% 0%}
+.palco.pilha .camada .esc{display:none}
+/* v2: capa dividida */
+.hero.dividida{background:var(--noite)}
+.hero.dividida picture,.hero.dividida .bg{left:42%;width:58%}
+.hero.dividida::after{display:none}
+.hero.dividida .wrap{top:0;bottom:0;align-items:center;justify-content:flex-start}
+.hero.dividida .esq{max-width:40%}
+.hero.dividida .lado{position:absolute;left:clamp(20px,4vw,56px);bottom:clamp(40px,7vh,80px)}
+.hero.dividida h1{font-size:clamp(56px,min(7vw,12vh),124px)}
+/* v2: capa centralizada */
+.hero.centro .wrap{flex-direction:column;align-items:center;text-align:center;bottom:clamp(50px,9vh,100px)}
+.hero.centro h1{max-width:12ch;margin:0 auto}
+.hero.centro .bora{justify-content:center}
+.hero.centro .lado{align-items:center}
+.hero .bg.kb{animation:kb 24s ease-out both}
+@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.selo{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:8px 14px;font-size:13.5px;font-weight:600;letter-spacing:.04em}
+.selo img{height:26px;width:auto;background:#fff;padding:2px}
+@media(max-width:900px){
+  .cgrid{grid-template-columns:1fr 1fr;gap:22px 14px}
+  .conf{text-align:center}.conf h2,.conf .sub{margin-left:auto;margin-right:auto}
+  .ci{text-align:left}
+  .palco.pilha .camada{top:9vh;height:74vh;border-radius:20px}
+  .hero.dividida picture,.hero.dividida .bg{left:0;width:100%;height:58%}
+  .hero.dividida .wrap{top:auto;bottom:34px;flex-direction:column;align-items:center}
+  .hero.dividida .esq{max-width:none}
+  .hero.dividida .lado{position:static}
+  .hero.dividida h1{font-size:clamp(44px,12vw,62px)}
+}
+.pgrid{margin-top:clamp(36px,4vw,56px)}.dest .todos{padding-top:clamp(40px,4vw,60px)}</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute">
@@ -388,12 +455,10 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
   </div>
 </header>
 
-<section class="hero" id="topo">
-  <picture>
-    <img decoding="async" class="bg" id="heroImg" fetchpriority="high" src="capa.jpg" alt="Mar azul de Alagoas visto de cima">
-  </picture>
+<section class="hero dividida" id="topo">
+  <picture><source media="(max-width:900px)" srcset="capa-v2-m.webp"><img decoding="async" class="bg" id="heroImg" fetchpriority="high" src="capa-v2.webp" alt="Praia do Francês com água cristalina e coqueiros"></picture>
   <div class="wrap">
-    <div class="esq"><h1 class="split" id="heroTit">Seu destino começa <em>aqui.</em></h1>
+    <div class="esq"><h1 class="split" id="heroTit">Sol, mar morninho e <em>zero preocupação.</em></h1>
     <div class="bora h-fade">Do aeroporto pro <span class="slot" id="slot"><b>seu hotel</b><b>Francês</b><b>Milagres</b><b>Maragogi</b><b>Gunga</b><b>seu resort</b><b>seu hotel</b></span></div></div>
     <div class="lado">
       <div class="bts h-fade"><a class="btn" href="#reservar">Pedir orçamento</a><a class="btn lin" href="#reservar" data-pre="Transfer aeroporto ⇄ hotel">Transfer aeroporto ⇄ hotel</a></div>
@@ -407,7 +472,7 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
   <div class="wrap">
     <div class="sol">
       <div class="disco" id="disco"></div>
-      <div class="foto"><img loading="lazy" decoding="async" src="mx-clientes.jpg" alt="Clientes da MaxTour no letreiro Eu Amo Alagoas" style="object-position:50% 60%"></div>
+      <div class="foto"><img loading="lazy" decoding="async" src="mx-clientes.webp" alt="Clientes da MaxTour no letreiro Eu Amo Alagoas" style="object-position:50% 60%"></div>
       <div class="tag">MaxTour<small>Táxi turismo e receptivo</small></div>
     </div>
     <div>
@@ -424,22 +489,23 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
   </div>
 </section>
 
+<section class="conf" id="seguranca">
+  <img loading="lazy" decoding="async" class="bgc" src="mx-ig-barcos.webp" alt="">
+  <div class="wrap">
+    <span class="k rv">Viaje tranquilo</span>
+    <h2 class="split">Do avião pra areia, <em>sem estresse.</em></h2>
+    <p class="sub rv">Você desembarca, sente o calor de Alagoas e a gente cuida do resto: malas no carro, ar gelado e o caminho que a gente conhece de cor.</p>
+    <div class="cgrid"><div class="ci rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M3 13l2-6h14l2 6v4H3z"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg><b>Carro só seu</b><span>Spin com 6 lugares ou Voyage com 4, só pro seu grupo.</span></div><div class="ci rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg><b>Preço combinado</b><span>Tudo acertado antes pelo WhatsApp, e dá pra parcelar no cartão.</span></div><div class="ci rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Pontualidade</b><span>A gente chega antes de você no desembarque.</span></div><div class="ci rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><b>Nota 5,0</b><span>Avaliação máxima de quem já viajou com a gente.</span></div></div>
+  </div>
+</section>
+
 <section class="pas" id="servicos">
   <div class="wrap">
     <div class="tit"><span class="k rv">Serviços</span><h2 class="split">Do que você <em>precisa?</em></h2></div>
     <div class="faixas">
-      <a class="faixa rv" href="#reservar" data-pre="Transfer aeroporto ⇄ hotel"><img loading="lazy" decoding="async" src="chegada-familia.jpg" alt="Família chegando no aeroporto com as malas" style="object-position:50% 40%"><span class="mk"><small>Transfer privativo</small><b>Do aeroporto pro hotel e do hotel pro aeroporto</b><em>A gente te espera no desembarque e leva na volta. Carro só pro seu grupo, com espaço pras malas.</em></span><span class="ir">Quero o transfer →</span></a>
-      <a class="faixa rv" href="#reservar" data-pre="Passeios privativos"><img loading="lazy" decoding="async" src="mx-hibiscus.jpg" alt="Cliente da MaxTour no Hibiscus Beach Club" style="object-position:50% 55%"><span class="mk"><small>Passeios privativos</small><b>Hibiscus, Milagres, Gunga e muito mais</b><em>Transporte privativo pra até 6 pessoas, com paradas pras fotos e volta no horário combinado.</em></span><span class="ir">Quero passear →</span></a>
+      <a class="faixa rv" href="#reservar" data-pre="Transfer aeroporto ⇄ hotel"><img loading="lazy" decoding="async" src="mx-ig-chegada.webp" alt="Clientes da MaxTour embarcando" style="object-position:50% 45%"><span class="mk"><small>Transfer privativo</small><b>Do aeroporto pro hotel e do hotel pro aeroporto</b><em>A gente te espera no desembarque e leva na volta. Carro só pro seu grupo, com espaço pras malas.</em></span><span class="ir">Quero o transfer →</span></a>
+      <a class="faixa rv" href="#reservar" data-pre="Passeios privativos"><img loading="lazy" decoding="async" src="mx-hibiscus.webp" alt="Cliente da MaxTour no Hibiscus Beach Club" style="object-position:50% 55%"><span class="mk"><small>Passeios privativos</small><b>Hibiscus, Milagres, Gunga e muito mais</b><em>Transporte privativo pra até 6 pessoas, com paradas pras fotos e volta no horário combinado.</em></span><span class="ir">Quero passear →</span></a>
     </div>
-  </div>
-</section></section>
-
-<section class="dest" id="roteiros">
-  <div class="dest-t wrap"><div class="tit"><span class="k rv">Destinos</span><h2 class="split">Pra onde a gente <em>te leva.</em></h2><p class="rv">Do desembarque no Zumbi dos Palmares pras praias mais bonitas de Alagoas, no carro só do seu grupo.</p></div></div>
-  <div class="palco" id="palco"></div>
-  <div class="todos wrap">
-    <div class="todos-h"><div><span class="k rv">Todos os destinos</span><h3 class="split">Escolha o <em>seu destino</em></h3></div><p class="rv">Toca no destino e ele já entra no seu orçamento.</p></div>
-    <div class="pgrid" id="pgrid"></div>
   </div>
 </section>
 
@@ -448,13 +514,26 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
     <div class="tit"><span class="k rv">Como funciona</span><h2 class="split">Do voo ao <em>destino</em></h2><p class="rv">Sem fila de táxi e sem procurar carro no aeroporto. Tudo combinado antes de você embarcar.</p></div>
     <div class="linha">
       <div class="eixo"><i id="eixo"></i></div>
-      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="praia-coqueiros.jpg" alt="Praia de Alagoas com coqueiros" style="object-position:50% 50%"></div><div class="tx"><b>01</b><h3>Você pede o orçamento</h3><p>Manda o destino, a data e quantas pessoas pelo WhatsApp. A resposta vem com o valor certinho.</p></div></div>
-      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="aeroporto.jpg" alt="Aeroporto Zumbi dos Palmares em Maceió" style="object-position:50% 45%"></div><div class="tx"><b>02</b><h3>A gente te espera no desembarque</h3><p>O carro já está no Zumbi dos Palmares quando o seu voo pousa, a qualquer hora do dia ou da noite.</p></div></div>
-      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="transfer-van.jpg" alt="Malas sendo colocadas no carro" style="object-position:50% 60%"></div><div class="tx"><b>03</b><h3>Malas no carro, ar gelado</h3><p>Espaço pras malas, carro limpo e só o seu grupo dentro. Você só senta e relaxa.</p></div></div>
-      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="estrada.jpg" alt="Estrada entre coqueiros no litoral de Alagoas" style="object-position:50% 50%"></div><div class="tx"><b>04</b><h3>Direto pro seu destino</h3><p>Hotel em Maceió, resort em Ipioca ou praia em Maragogi. A gente conhece cada caminho.</p></div></div>
-      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="d-orla.jpg" alt="Praia em Maceió" style="object-position:40% 60%"></div><div class="tx"><b>05</b><h3>E a volta já fica combinada</h3><p>No dia de ir embora, a gente busca no hotel no horário certo pro seu voo.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="mx-ig-rede.webp" alt="Rede entre coqueiros numa praia de Alagoas" style="object-position:50% 50%"></div><div class="tx"><b>01</b><h3>Você pede o orçamento</h3><p>Manda o destino, a data e quantas pessoas pelo WhatsApp. A resposta vem com o valor certinho.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="aeroporto.webp" alt="Aeroporto Zumbi dos Palmares em Maceió" style="object-position:50% 45%"></div><div class="tx"><b>02</b><h3>A gente te espera no desembarque</h3><p>O carro já está no Zumbi dos Palmares quando o seu voo pousa, a qualquer hora do dia ou da noite.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="transfer-van.webp" alt="Malas sendo colocadas no carro" style="object-position:50% 60%"></div><div class="tx"><b>03</b><h3>Malas no carro, ar gelado</h3><p>Espaço pras malas, carro limpo e só o seu grupo dentro. Você só senta e relaxa.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="mx-ig-orla.webp" alt="Orla de Maceió vista de cima" style="object-position:50% 50%"></div><div class="tx"><b>04</b><h3>Direto pro seu destino</h3><p>Hotel em Maceió, resort em Ipioca ou praia em Maragogi. A gente conhece cada caminho.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="mx-ig-praia.webp" alt="Praia de Maceió" style="object-position:40% 60%"></div><div class="tx"><b>05</b><h3>E a volta já fica combinada</h3><p>No dia de ir embora, a gente busca no hotel no horário certo pro seu voo.</p></div></div>
     </div>
   </div>
+</section>
+
+<section class="dest" id="roteiros">
+  <div class="dest-t wrap"><div class="tit"><span class="k rv">Destinos</span><h2 class="split">Pra onde a gente <em>te leva.</em></h2><p class="rv">Do desembarque no Zumbi dos Palmares pras praias mais bonitas de Alagoas, no carro só do seu grupo.</p></div></div>
+  <div class="todos wrap">
+    <div class="todos-h"><div><span class="k rv">Todos os destinos</span><h3 class="split">Escolha o <em>seu destino</em></h3></div><p class="rv">Toca no destino e ele já entra no seu orçamento.</p></div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<section class="fita">
+  <div class="wrap"><div class="tit"><span class="k rv">No Instagram da MaxTour</span><h2 class="split">O paraíso das <em>águas.</em></h2><p class="rv">Tudo isso te esperando. Segue a gente em <a href="https://www.instagram.com/maxtour_maceioalagoas/" target="_blank" rel="noopener">@maxtour_maceioalagoas</a>.</p></div></div>
+  <div class="trilha" aria-hidden="true"><img loading="lazy" decoding="async" src="mx-f1.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f2.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f3.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f4.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f5.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f6.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f7.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f8.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f9.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f1.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f2.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f3.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f4.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f5.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f6.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f7.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f8.webp" alt="Praias de Alagoas no Instagram da MaxTour"><img loading="lazy" decoding="async" src="mx-f9.webp" alt="Praias de Alagoas no Instagram da MaxTour"></div>
 </section>
 
 <section class="rst" id="resorts">
@@ -465,7 +544,7 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
 </section>
 
 <section class="res" id="reservar">
-  <img loading="lazy" decoding="async" class="res-img" src="d-milagres.jpg" alt="">
+  <img loading="lazy" decoding="async" class="res-img" src="d-milagres.webp" alt="">
   <div class="wrap">
   <div class="res-t">
     <span class="k rv">Orçamento sem compromisso</span>
@@ -499,20 +578,20 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
       <div><span class="k rv">Avaliações</span><h2 class="split">Nota máxima de quem já foi.</h2></div>
       <div class="nota rv"><svg><use href="#g"/></svg><b>5,0</b><div><span class="est brilho"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><small>4 avaliações no Google</small></div></div>
     </div>
-    <div class="mural"><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Serviço impecável! Motorista super atencioso, carro limpo e corrida muito tranquila. Recomendo muito!</p><div class="quem-av"><span class="av" style="background:#c8740a">J</span><div><b>Jessiany Cavalcante</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="mx-carros.jpg" alt="Carros da MaxTour, Spin e Voyage"><figcaption>Spin 7 lugares e Voyage</figcaption></figure><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Ótima experiência, motoristas e guia totalmente qualificado e atencioso, nota 10.</p><div class="quem-av"><span class="av" style="background:#16171b">R</span><div><b>Roosevelt Messias</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="mx-milagres.jpg" alt="Praia em São Miguel dos Milagres"><figcaption>São Miguel dos Milagres</figcaption></figure><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Super recomendo, motoristas muito educados e respeitador.</p><div class="quem-av"><span class="av" style="background:#f2a10c">R</span><div><b>Rosielly Fernanda</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="mx-buggy.jpg" alt="Passeio de buggy nas falésias do Gunga"><figcaption>Falésias do Gunga</figcaption></figure></div>
+    <div class="mural"><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Serviço impecável! Motorista super atencioso, carro limpo e corrida muito tranquila. Recomendo muito!</p><div class="quem-av"><span class="av" style="background:#c8740a">J</span><div><b>Jessiany Cavalcante</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="mx-carros.webp" alt="Carros da MaxTour, Spin e Voyage"><figcaption>Spin 7 lugares e Voyage</figcaption></figure><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Ótima experiência, motoristas e guia totalmente qualificado e atencioso, nota 10.</p><div class="quem-av"><span class="av" style="background:#16171b">R</span><div><b>Roosevelt Messias</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="mx-milagres.webp" alt="Praia em São Miguel dos Milagres"><figcaption>São Miguel dos Milagres</figcaption></figure><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Super recomendo, motoristas muito educados e respeitador.</p><div class="quem-av"><span class="av" style="background:#f2a10c">R</span><div><b>Rosielly Fernanda</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="mx-buggy.webp" alt="Passeio de buggy nas falésias do Gunga"><figcaption>Falésias do Gunga</figcaption></figure></div>
   </div>
 </section>
 
 <section class="loc" id="local">
   <div class="wrap">
     <div class="tit"><span class="k rv">Onde fica</span><h2 class="split">Pertinho de <em>você.</em></h2><p class="rv">R. do Corote, 2, Praia do Francês, Marechal Deodoro. Busca no aeroporto e no seu hotel.</p></div>
-    <div class="mapa rv"><iframe src="https://maps.google.com/maps?q=Maxtour%20Taxi%20Turismo%20e%20Receptivo%20Praia%20do%20Franc%C3%AAs&z=14&output=embed" loading="lazy" title="Mapa da MaxTour"></iframe></div>
+    <div class="mapa rv"><iframe data-src="https://maps.google.com/maps?q=Maxtour%20Taxi%20Turismo%20e%20Receptivo%20Praia%20do%20Franc%C3%AAs&z=14&output=embed" title="Mapa da MaxTour"></iframe></div>
     <div class="loc-b rv"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Maxtour+Taxi+Turismo+e+Receptivo+Praia+do+Franc%C3%AAs" target="_blank" rel="noopener">Abrir no Google Maps</a></div>
   </div>
 </section>
 
 <section class="final" id="contato">
-  <img loading="lazy" decoding="async" class="bg" src="final.jpg" alt="Jangadas no mar de Maceió no fim de tarde">
+  <img loading="lazy" decoding="async" class="bg" src="final.webp" alt="Jangadas no mar de Maceió no fim de tarde">
   <div class="wrap">
     <div class="cta">
       <span class="k rv">Alta temporada chegando</span>
@@ -538,30 +617,30 @@ footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255
 const WA='5582987573577';
 // d = foto deitada (computador), m = foto em pé (celular)
 const ROTEIROS=[
-  {id:'Maragogi',d:'d-maragogi.jpg',m:'maragogi.jpg',reg:'Costa dos Corais',t:'Maragogi',tx:'As piscinas naturais mais famosas do Brasil. Saindo cedo, você chega na maré baixa.'},
-  {id:'São Miguel dos Milagres',d:'d-milagres.jpg',m:'d-milagres.jpg',mp:'62% 50%',reg:'Rota Ecológica',t:'Milagres',tx:'Piscinas naturais, coqueiral sem fim e as pousadas mais charmosas de Alagoas.'},
-  {id:'Praia do Gunga',d:'d-gunga.jpg',m:'gunga-mirante.jpg',mp:'50% 60%',reg:'Litoral sul',t:'Gunga',tx:'O mirante sobre o coqueiral e as falésias, com ida e volta no horário que você quiser.'},
-  {id:'Praia do Francês',d:'frances.jpg',m:'frances.jpg',mp:'40% 50%',reg:'Litoral sul · 30 min',t:'Francês',tx:'Mar calmo protegido pelos recifes e barracas pé na areia.'},
-  {id:'Ipioca',d:'d-ipioca.jpg',m:'ipioca.jpg',reg:'Litoral norte de Maceió',t:'Ipioca',tx:'Beach clubs pé na areia e os resorts do litoral norte de Maceió.'},
-  {id:'Hotel em Maceió',d:'d-orla.jpg',m:'orla-maceio.jpg',mp:'50% 50%',reg:'Pajuçara · Ponta Verde · Jatiúca',t:'Maceió',tx:'Do desembarque direto pro seu hotel na orla de Maceió.'},
-  {id:'Ilha da Crôa',d:'d-croa.jpg',m:'croa.jpg',reg:'Barra de Santo Antônio',t:'Ilha da Crôa',tx:'Banco de areia, mar cristalino e os beach clubs da Barra de Santo Antônio.'},
-  {id:'Foz do São Francisco',d:'d-foz.jpg',m:'foz.jpg',mp:'50% 60%',reg:'Piaçabuçu',t:'Foz do São Francisco',tx:'Dunas, rio e mar se encontrando num cenário que parece outro país.'},
-  {id:'Cânions do São Francisco',d:'d-canions.jpg',m:'canions.jpg',reg:'Piranhas · sertão',t:'Cânions do Xingó',tx:'Paredões de pedra nas águas verdes do Velho Chico.'}
+  {id:'Maragogi',d:'d-maragogi.webp',m:'mx-ig-maragogi.webp',reg:'Costa dos Corais',t:'Maragogi',tx:'As piscinas naturais mais famosas do Brasil. Saindo cedo, você chega na maré baixa.'},
+  {id:'São Miguel dos Milagres',d:'d-milagres.webp',m:'d-milagres.webp',mp:'62% 50%',reg:'Rota Ecológica',t:'Milagres',tx:'Piscinas naturais, coqueiral sem fim e as pousadas mais charmosas de Alagoas.'},
+  {id:'Praia do Gunga',d:'d-gunga.webp',m:'gunga-mirante.webp',mp:'50% 60%',reg:'Litoral sul',t:'Gunga',tx:'O mirante sobre o coqueiral e as falésias, com ida e volta no horário que você quiser.'},
+  {id:'Praia do Francês',d:'frances.webp',m:'frances.webp',mp:'40% 50%',reg:'Litoral sul · 30 min',t:'Francês',tx:'Mar calmo protegido pelos recifes e barracas pé na areia.'},
+  {id:'Ipioca',d:'d-ipioca.webp',m:'ipioca.webp',reg:'Litoral norte de Maceió',t:'Ipioca',tx:'Beach clubs pé na areia e os resorts do litoral norte de Maceió.'},
+  {id:'Hotel em Maceió',d:'d-orla.webp',m:'mx-ig-orla2.webp',mp:'50% 50%',reg:'Pajuçara · Ponta Verde · Jatiúca',t:'Maceió',tx:'Do desembarque direto pro seu hotel na orla de Maceió.'},
+  {id:'Ilha da Crôa',d:'d-croa.webp',m:'croa.webp',reg:'Barra de Santo Antônio',t:'Ilha da Crôa',tx:'Banco de areia, mar cristalino e os beach clubs da Barra de Santo Antônio.'},
+  {id:'Foz do São Francisco',d:'d-foz.webp',m:'foz.webp',mp:'50% 60%',reg:'Piaçabuçu',t:'Foz do São Francisco',tx:'Dunas, rio e mar se encontrando num cenário que parece outro país.'},
+  {id:'Cânions do São Francisco',d:'d-canions.webp',m:'canions.webp',reg:'Piranhas · sertão',t:'Cânions do Xingó',tx:'Paredões de pedra nas águas verdes do Velho Chico.'}
 ];
 const RESORTS=[
-  ['rs-vilagale.jpg','Barra de Santo Antônio','Vila Galé Alagoas'],
-  ['rs-salmaragogi.jpg','Maragogi','Salinas Maragogi'],
-  ['rs-grandoca.jpg','Maragogi','Grand Oca Maragogi'],
-  ['rs-japaratinga.jpg','Japaratinga','Japaratinga Lounge'],
-  ['rs-maceiomar.jpg','Ipioca · Maceió','Maceió Mar Resort'],
-  ['rs-salmaceio.jpg','Ipioca · Maceió','Salinas Maceió'],
-  ['rs-ipioca.jpg','Ipioca · Maceió','Ipioca Beach Resort']
+  ['rs-vilagale.webp','Barra de Santo Antônio','Vila Galé Alagoas'],
+  ['rs-salmaragogi.webp','Maragogi','Salinas Maragogi'],
+  ['rs-grandoca.webp','Maragogi','Grand Oca Maragogi'],
+  ['rs-japaratinga.webp','Japaratinga','Japaratinga Lounge'],
+  ['rs-maceiomar.webp','Ipioca · Maceió','Maceió Mar Resort'],
+  ['rs-salmaceio.webp','Ipioca · Maceió','Salinas Maceió'],
+  ['rs-ipioca.webp','Ipioca · Maceió','Ipioca Beach Resort']
 ];
 const OUTROS=['Passeios privativos','Outro lugar'];
 const orc=document.getElementById('orc'),palco=document.getElementById('palco'),pgrid=document.getElementById('pgrid'),rgrid=document.getElementById('rgrid');
 const DESTAQUES=['Maragogi','São Miguel dos Milagres','Praia do Gunga','Foz do São Francisco'];
 const DQ=ROTEIROS.filter(r=>DESTAQUES.includes(r.id));
-DQ.forEach((r,i)=>palco.insertAdjacentHTML('beforeend',`<div class="camada"><picture><source media="(max-width:900px)" srcset="${r.m}"><img loading="lazy" decoding="async" src="${r.d}" alt="${r.t}"${r.mp?` style="--mp:${r.mp}"`:''}></picture><div class="wrap"><div class="nome"><span class="n">${String(i+1).padStart(2,'0')} / ${String(DQ.length).padStart(2,'0')}</span><small>${r.reg}</small><h3>${r.t}</h3></div><div class="lado"><p>${r.tx}</p><a class="btn" href="#reservar" data-pre="${r.id}">Quero esse</a></div></div><div class="esc"></div></div>`));
+if(palco)DQ.forEach((r,i)=>palco.insertAdjacentHTML('beforeend',`<div class="camada"><picture><source media="(max-width:900px)" srcset="${r.m}"><img decoding="async" fetchpriority="low" src="${r.d}" alt="${r.t}"${r.mp?` style="--mp:${r.mp}"`:''}></picture><div class="wrap"><div class="nome"><span class="n">${String(i+1).padStart(2,'0')} / ${String(DQ.length).padStart(2,'0')}</span><small>${r.reg}</small><h3>${r.t}</h3></div><div class="lado"><p>${r.tx}</p><a class="btn" href="#reservar" data-pre="${r.id}">Quero esse</a></div></div><div class="esc"></div></div>`));
 const TAM=['g','t','','','','','w','t','g'];
 ROTEIROS.forEach((r,i)=>{
   const tm=TAM[i]||'',deitada=tm==='g'||tm==='w';
@@ -650,11 +729,11 @@ document.querySelectorAll('.split').forEach(el=>{
   walk(el);
 });
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);gsap.config({force3D:true});ScrollTrigger.config({ignoreMobileResize:true});
 const REC=/[?&]rec/.test(location.search);
 window.lenis=null;
 if(!REC&&window.Lenis){
-  window.lenis=new Lenis({lerp:.09});lenis.on('scroll',ScrollTrigger.update);
+  window.lenis=new Lenis({lerp:.1,wheelMultiplier:1});lenis.on('scroll',ScrollTrigger.update);
   gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
   document.querySelectorAll('a[href^="#"]:not([data-pre])').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();lenis.scrollTo(a.getAttribute('href'),{offset:a.getAttribute('href')==='#reservar'?-60:0})}));
 }
@@ -681,16 +760,8 @@ gsap.utils.toArray('.rv').forEach(el=>gsap.from(el,{opacity:0,duration:1.5,ease:
 // quem somos: o sol cresce e gira de leve enquanto a seção entra
 gsap.fromTo('#disco',{scale:.6,rotate:-30},{scale:1,rotate:0,ease:'none',scrollTrigger:{trigger:'.quem',start:'top 90%',end:'center center',scrub:true}});
 gsap.from('.sol .foto,.sol .tag',{opacity:0,duration:1.5,stagger:.2,ease:'power2.out',scrollTrigger:{trigger:'.sol',start:'top 80%'}});
-// passeios: o palco fica preso e cada foto cobre a anterior de baixo pra cima, rápido
-const CM=gsap.utils.toArray('.camada');
-CM.slice(1).forEach(c=>gsap.set(c,{clipPath:'inset(100% 0% 0% 0%)'}));
-const tlp=gsap.timeline({scrollTrigger:{trigger:'#palco',start:'top top',end:()=>'+='+(CM.length-1)*innerHeight*.75,pin:true,scrub:REC?true:.8,anticipatePin:1,invalidateOnRefresh:true}});
-CM.slice(1).forEach((c,i)=>{
-  tlp.to(c,{clipPath:'inset(0% 0% 0% 0%)',ease:'none',duration:1},i)
-     .to(CM[i].querySelector('.esc'),{opacity:.6,ease:'none',duration:1},i)
-     .fromTo(c.querySelectorAll('.n,small,h3,p,.btn'),{opacity:0,y:40},{opacity:1,y:0,stagger:.05,duration:.5,ease:'power2.out'},i+.45);
-});
-gsap.from(CM[0].querySelectorAll('.n,small,h3,p,.btn'),{opacity:0,y:30,duration:1.3,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:'#palco',start:'top 60%'}});
+// destinos (v2: só transform, sem clip-path, pra não engasgar)
+const CM=[];
 // capa: "Bora pro" troca o destino sozinho
 const slots=gsap.utils.toArray('#slot b');gsap.set(slots,{yPercent:100});gsap.set(slots[0],{yPercent:0});
 const sl=gsap.timeline({repeat:-1,delay:2.2});
@@ -709,11 +780,24 @@ mm.add('(min-width:901px)',()=>{
   // capa fica parada e escurece enquanto a seção quem somos sobe por cima como um cartão que se abre
   ScrollTrigger.create({trigger:'.hero',start:'top top',end:'bottom top',pin:true,pinSpacing:false});
   gsap.to('#heroSombra',{opacity:.75,ease:'none',scrollTrigger:{trigger:'.quem',start:'top bottom',end:'top top',scrub:true}});
-  gsap.fromTo('.quem',{clipPath:'inset(6% 6% 0% 6% round 36px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'.quem',start:'top bottom',end:'top top',scrub:true}});
+  gsap.fromTo('.quem',{y:60,scale:.94},{y:0,scale:1,ease:'none',scrollTrigger:{trigger:'.quem',start:'top bottom',end:'top top',scrub:true}});
   // orçamento abre como um cartão por cima dos resorts
-  gsap.fromTo('#reservar',{clipPath:'inset(7% 6% 0% 6%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#reservar',start:'top 95%',end:'top 25%',scrub:REC?true:1}});
+  gsap.from('#reservar .res-t',{y:70,opacity:0,duration:1.3,ease:'power3.out',scrollTrigger:{trigger:'#reservar',start:'top 75%'}});
 });
-window.addEventListener('load',()=>ScrollTrigger.refresh());
+window.addEventListener('load',()=>{ScrollTrigger.sort();ScrollTrigger.refresh()});
+
+/* v2: o mapa carrega antes de você chegar nele e as fotos baixam todas em segundo plano */
+(function(){
+  const mf=document.querySelector('.mapa iframe[data-src]');
+  const liga=()=>{if(mf&&!mf.src)mf.src=mf.dataset.src};
+  if(mf&&'IntersectionObserver' in window){const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){liga();io.disconnect()}},{rootMargin:'2500px 0px'});io.observe(mf)}
+  addEventListener('load',()=>{
+    const L=[...document.querySelectorAll('img[loading="lazy"]')];let i=0;
+    (function n(){L.slice(i,i+5).forEach(im=>{im.loading='eager'});i+=5;if(i<L.length)setTimeout(n,180)})();
+    document.querySelectorAll('.camada img').forEach(im=>{if(im.decode)im.decode().catch(()=>{})});
+    setTimeout(liga,4000);
+  });
+})();
 </script>
 </body>
 </html>
